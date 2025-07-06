@@ -208,4 +208,5 @@ app.post("/polls/:id/vote", async (req, res) => {
 });
 
 // === Start Server ===
-app.listen(PORT, () => console.log(\`Student Hub running on https://studenthub-3-fzrd.onrender.com`));
+app.listen(PORT, () => console.log(`Student Hub running on https://studenthub-3-fzrd.onrender.com`));
+
