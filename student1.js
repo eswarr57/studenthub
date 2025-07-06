@@ -1,28 +1,26 @@
-// student-hub.js
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// === MIDDLEWARE ===
+// ✅ Hardcoded MongoDB Atlas URI
+const mongodb_url = "mongodb+srv://kaligatlaeswarr:cDsWorJYmVBmvjI0@cluster0.gtv0y0u.mongodb.net/student_hub?retryWrites=true&w=majority";
+
+// === Middleware ===
 app.use(cors());
 app.use(express.json());
 
-// === MONGODB CONNECTION ===
-const mongodb_url = "mongodb+srv://kaligatlaeswarr:cDsWorJYmVBmvjI0@cluster0.gtv0y0u.mongodb.net/student_hub?retryWrites=true&w=majority";
-
+// === MongoDB Connection ===
 mongoose.connect(mongodb_url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB connected"))
-.catch(err => console.error("❌ MongoDB connection error:", err));
+.then(() => console.log("✅ Connected to MongoDB"))
+.catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// === SCHEMAS ===
+// === Schemas ===
 const TaskSchema = new mongoose.Schema({
   title: String,
   date: String,
@@ -41,9 +39,9 @@ const PollSchema = new mongoose.Schema({
 const Task = mongoose.model("Task", TaskSchema);
 const Poll = mongoose.model("Poll", PollSchema);
 
-// === ROUTES ===
+// === Routes ===
 
-// Serve static HTML/JS
+// Serve the HTML app at root
 app.get("/", (req, res) => {
   res.send(`
 <!DOCTYPE html>
@@ -188,7 +186,7 @@ app.post("/polls/:id/vote", async (req, res) => {
   res.json(poll);
 });
 
-// === START SERVER ===
+// === Start Server ===
 app.listen(PORT, () => {
-  console.log(`🚀 Student Hub running on https://studenthub-3-fzrd.onrender.com`);
+  console.log(`✅ Student Hub running on https://studenthub-3-fzrd.onrender.com`);
 });
