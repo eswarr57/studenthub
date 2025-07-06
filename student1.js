@@ -1,10 +1,10 @@
 // server.js - Full Stack Student Collaboration Hub
 
 // Required dependencies
+const bcrypt = require('bcrypt');  // instead of bcryptjs
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
